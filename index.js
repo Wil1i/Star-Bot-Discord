@@ -1,9 +1,11 @@
 // Import librarys
 console.clear();
 console.log("[LIB] Importing librarys.");
+
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
+const permission = require("./functions/permission");
 const db = require("quick.db");
 
 // Create main client
@@ -53,6 +55,21 @@ client.on("ready", () => {
 });
 
 client.on("messageCreate", (message) => {
+  const messageArry = message.content.split(" ");
+  const prefix = db.get("bot.prefix").toString();
+  const cmd = messageArry[0].replace(prefix, "");
+
+  if (client.commands.has(cmd)) {
+    const grabCommand = client.commands.get(cmd);
+    if (!grabCommand.permission) return grabCommand.execute(client, message);
+
+    const isCommandAvailable = permission.check(
+      message,
+      grabCommand.permission
+    );
+    if (isCommandAvailable) return grabCommand.execute(client, message);
+  }
+
   if (client.events.has("messageCreate"))
     client.events.get("messageCreate").execute(client, message);
 });
