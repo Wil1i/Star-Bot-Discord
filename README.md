@@ -5,8 +5,11 @@
 - [x] Complete `functions > permission > check` (Enable permission check for def permissions && Enable permission check for custome permissions )
 - [x] Complete `index.js > messageCreate event > Command Handler` (Check everything and make sure this option have not any bugs)
 - [x] Complete `functions > log` (Check everything and make sure this option have not any bugs)
+- [ ] Complete `events > guildMemberAdd`
+- [ ] Complete `commands > hide`
 - [ ] Move commands to Slash-Commands
 - [ ] Add command `mute` (No-Role) (Description in DM)
+- [ ] Sync mute command to database, if use rejoined automaticly give roles
 - [ ] When a user server-muted , save this to database for fix leave/join bug (if user leave from server and join again, user will be unServer mute)
 
 ## Library
