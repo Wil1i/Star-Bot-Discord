@@ -5,7 +5,7 @@ console.log("[LIB] Importing librarys.");
 const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
-const permission = require("./functions/permission");
+const library = require("./library/star");
 const db = require("quick.db");
 
 // Create main client
@@ -61,12 +61,11 @@ client.on("messageCreate", (message) => {
 
   if (client.commands.has(cmd)) {
     const grabCommand = client.commands.get(cmd);
-    if (!grabCommand.permission) return grabCommand.execute(client, message);
+    if (!grabCommand.permissions) return grabCommand.execute(client, message);
 
-    const isCommandAvailable = permission.check(
-      message,
-      grabCommand.permission
-    );
+    const isCommandAvailable = library.permissions.check(message, [
+      grabCommand.permissions,
+    ]);
     if (isCommandAvailable) return grabCommand.execute(client, message);
   }
 

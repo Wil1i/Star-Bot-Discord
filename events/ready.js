@@ -1,5 +1,5 @@
 const db = require("quick.db");
-const config = require("../functions/config");
+const library = require("../library/star");
 
 module.exports = {
   name: "ready",
@@ -7,6 +7,6 @@ module.exports = {
   execute(client) {
     console.log(`Bot ${client.user.tag} is now ready to use`);
 
-    config.execute(client);
+    library.db.config(client);
   },
 };
