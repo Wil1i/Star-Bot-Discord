@@ -6,7 +6,7 @@
 - [x] Complete `index.js > messageCreate event > Command Handler` (Check everything and make sure this option have not any bugs)
 - [x] Complete `functions > log` (Check everything and make sure this option have not any bugs)
 - [ ] Complete `events > guildMemberAdd`
-- [ ] Complete `commands > hide`
+- [x] Complete `commands > hide`
 - [ ] Move commands to Slash-Commands
 - [x] Add command `mute` (No-Role) (Description in DM)
 - [x] Sync mute command to database, if use rejoined automaticly give roles

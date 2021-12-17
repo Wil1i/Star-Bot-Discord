@@ -35,42 +35,34 @@ for (const command of commandsDirectory) {
       `[REGISTERING] Command ${rCommand.name} successfully registered`
     );
   } else {
-    console.log(`[REGISTRING]Can't register ${command} command`);
+    console.log(`[REGISTRING] Can't register ${command} command`);
   }
 }
 
-for (const event of eventsDirectory) {
-  const rEvent = require(`./events/${event}`);
+for (const eventFile of eventsDirectory) {
+  const rEvent = require(`./events/${eventFile}`);
   if (rEvent.execute && rEvent.name) {
     client.events.set(rEvent.name, rEvent);
+    client.on(rEvent.name, (arg1, arg2, arg3) => {
+      rEvent.execute(client, arg1, arg2, arg3);
+    });
+
     console.log(`[REGISTERING] event ${rEvent.name} successfully registered`);
   } else {
-    console.log(`[REGISTRING]Can't register ${event} event`);
+    console.log(`[REGISTRING] Can't register ${eventFile} event`);
   }
 }
 
-// Handle events
-client.on("ready", () => {
-  client.events.get("ready").execute(client);
-});
+let cmd = {
+  check(commandName) {
+    if (client.commands.has(commandName)) return true;
+    if (!client.commands.has(commandName)) return false;
+  },
+  get(commandName) {
+    return client.commands.get(commandName);
+  },
+};
 
-client.on("messageCreate", (message) => {
-  const messageArry = message.content.split(" ");
-  const prefix = db.get("bot.prefix").toString();
-  const cmd = messageArry[0].replace(prefix, "");
-
-  if (client.commands.has(cmd)) {
-    const grabCommand = client.commands.get(cmd);
-    if (!grabCommand.permissions) return grabCommand.execute(client, message);
-
-    const isCommandAvailable = library.permissions.check(message, [
-      grabCommand.permissions,
-    ]);
-    if (isCommandAvailable) return grabCommand.execute(client, message);
-  }
-
-  if (client.events.has("messageCreate"))
-    client.events.get("messageCreate").execute(client, message);
-});
+module.exports.cmd = cmd;
 
 client.login(config.bot.token);
