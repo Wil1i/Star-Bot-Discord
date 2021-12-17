@@ -40,4 +40,27 @@ module.exports = {
       embeds: [noRoleEmbed],
     });
   },
+
+  hideExpired({ client, user, roleID, categoryName }) {
+    let webhookURL = config.webhooks.hideExpired || undefined;
+    if (db.has("webhooks.hideExpired"))
+      webhookURL = db.get("webhooks.hideExpired");
+
+    const hideExpiredEmbed = new MessageEmbed()
+      .setColor(db.get("bot.colors.log"))
+      .setFooter(db.get("embeds.footer"))
+      .setAuthor("Hide Expired")
+      .addField("Username", user.author.id, true)
+      .addField("Expired", `${categoryName} | <@&${roleID}>`, true)
+      .setThumbnail(user.author.displayAvatarURL({ dynamic: true, size: 1024 }))
+      .setTimestamp();
+
+    const hideExpiredWebhook = new WebhookClient({ url: webhookURL });
+
+    hideExpiredWebhook.send({
+      username: client.user.username,
+      avatarURL: client.user.displayAvatarURL(),
+      embeds: [hideExpiredEmbed],
+    });
+  },
 };

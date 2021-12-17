@@ -1,11 +1,19 @@
-const configFunc = require("./config");
-const logFunc = require("./log");
-const permissionFunc = require("./permission");
+const fs = require("fs");
+const { Collection } = require("discord.js");
+const functions = new Collection();
+
+const functionsDir = fs
+  .readdirSync("./library")
+  .filter((file) => file.endsWith(".js") && file !== "star.js");
+
+for (const func of functionsDir) {
+  const requiredFunction = require(`./${func}`);
+  functions.set(func.replace(".js", ""), requiredFunction);
+}
 
 let db = {
-  config(client) {
-    if (!client) throw new Error("Enter client for config\nClient not exist");
-    configFunc.execute(client);
+  config() {
+    functions.get("config").set();
   },
 };
 
@@ -16,7 +24,7 @@ let log = {
       throw new Error(
         "Enter correct data for noRolesLog\nRequired : client , executor , username , roleID"
       );
-    logFunc.noRolesLog({ client, executor, user, roleID });
+    functions.get("log").noRolesLog({ client, executor, user, roleID });
   },
 };
 
@@ -25,10 +33,17 @@ let permissions = {
   check(message, permissions) {
     if (!message || !permissions)
       throw new Error("Enter message and permission for checking permissions");
-    return permissionFunc.check(message, permissions);
+    functions.get("permission").check(message, permissions);
+  },
+};
+
+let noRoles = {
+  expiredUsers() {
+    return functions.get("expiredUsers").check();
   },
 };
 
 module.exports.db = db;
 module.exports.log = log;
 module.exports.permissions = permissions;
+module.exports.noRoles = noRoles;

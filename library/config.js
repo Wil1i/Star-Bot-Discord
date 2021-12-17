@@ -2,9 +2,7 @@ const config = require("../config.json");
 const db = require("quick.db");
 
 module.exports = {
-  name: "config",
-  description: "Config database",
-  execute(client) {
+  set() {
     console.log("[DB] Checking DataBase...");
 
     if (!db.has("bot.token") && config.bot.token) {
@@ -30,6 +28,11 @@ module.exports = {
     if (!db.has("embeds.footer") && config.embeds.footer) {
       db.set("embeds.footer", config.embeds.footer);
       console.log(`[DB] Footer text registered in database`);
+    }
+
+    if (!db.has("guilds.main") && config.guilds.main) {
+      db.set("guilds.main", config.guilds.main);
+      console.log(`[DB] Main guild registered in database`);
     }
 
     console.log("[DB] DataBase checked");

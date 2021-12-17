@@ -4,18 +4,22 @@ module.exports = {
   name: "guildMemberAdd",
   description: "Handle when new members joined in server",
   execute(client, member) {
-    //   Check if user is server deafen or server mute in database
-    if (db.has(`users.${member.user.id}.voice.mute`)) {
-      // user is server mute
-    }
-    if (db.has(`users.${member.user.id}.voice.deafen`)) {
-      // user is server deafen
-    }
+    console.log(`--- WHEN A USER JOINED : ID : ${member.user.id}`);
 
-    // Check if user is hide from any categorys in database
-    if (db.has(`users.${member.user.id}.hides`)) {
-      for (const category of db.get(`users.${member.user.id}.hides`)) {
-      }
+    // Check and update NO-ROLES for user
+    const userStats = db.get(`users.${member.user.id}.hides`);
+    if (userStats) {
+      const isUserHideFromAdult = userStats.adult == true;
+      const isUserHideFromGrate = userStats.grate == true;
+      const isUserHideFromGame = userStats.game == true;
+
+      const adultRole = db.get("roles.adult");
+      const grateRole = db.get("roles.grate");
+      const gameRole = db.get("roles.game");
+
+      if (isUserHideFromAdult) member.roles.add(adultRole);
+      if (isUserHideFromGrate) member.roles.add(grateRole);
+      if (isUserHideFromGame) member.roles.add(gameRole);
     }
   },
 };

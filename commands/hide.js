@@ -22,11 +22,10 @@ module.exports = {
 
       const availableHides = ["grate", "adult", "game"];
 
-      if (!availableHides[hideCategory].toLowerCase()) return;
+      // If hide category is not any item is available in availableHides dont do anything else continue
+      if (!availableHides.includes(hideCategory)) return;
 
-      db.add(`users.${userMention.id}.hides`, hideCategory);
-      const roleID = db.get(`roles.${hideCategory}`);
-      userMention.roles.add(roleID);
+      // Add role to user
 
       //   Time by day
 
@@ -54,7 +53,11 @@ module.exports = {
         return false;
       }
 
+      // Add role to user
+      db.add(`users.${userMention.id}.hides`, hideCategory);
       db.set(`users.${userMention.id}.${hideCategory}.expire`, expireTime);
+      const roleID = db.get(`roles.${hideCategory}`);
+      userMention.roles.add(roleID);
     }
   },
 };
