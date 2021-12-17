@@ -5,18 +5,20 @@
 - [x] Complete `functions > permission > check` (Enable permission check for def permissions && Enable permission check for custome permissions )
 - [x] Complete `index.js > messageCreate event > Command Handler` (Check everything and make sure this option have not any bugs)
 - [x] Complete `functions > log` (Check everything and make sure this option have not any bugs)
-- [ ] Complete `events > guildMemberAdd`
+- [x] Complete `events > guildMemberAdd`
 - [x] Complete `commands > hide`
 - [ ] Move commands to Slash-Commands
 - [x] Add command `mute` (No-Role) (Description in DM)
 - [x] Sync mute command to database, if use rejoined automaticly give roles
 - [ ] When a user server-muted , save this to database for fix leave/join bug (if user leave from server and join again, user will be unServer mute)
+- [ ] When a user removed no role from another user, cancel event
+- [ ] Complete time command
 
 ## Library
 
-for check permission : -
-for log : -
-for config database : -
+for check permission : `require("./library/star.js").permission.check()`
+for log : `require("./library/star.js").log`
+for config database : `require("./library/star.js").config.set()`
 
 ## Events
 

@@ -17,21 +17,14 @@ module.exports = {
         `${messageArry[0]} ${messageArry[1]} ${messageArry[2]} ${messageArry[3]}`,
         ""
       );
-
       const hideCategory = messageArry[1].toLowerCase();
-
       const availableHides = ["grate", "adult", "game"];
-
       // If hide category is not any item is available in availableHides dont do anything else continue
       if (!availableHides.includes(hideCategory)) return;
-
       // Add role to user
-
       //   Time by day
-
       const now = new Date();
       let expireTime = now;
-
       //   Hours
       if (messageArry[3].toLowerCase().endsWith("h")) {
         expireTime = now.addHours(
@@ -40,24 +33,25 @@ module.exports = {
         // Days
       } else if (messageArry[3].toLowerCase().endsWith("d")) {
         expireTime = now.addHours(
-          parseInt(messageArry[3].toLowerCase().replace("h", "")) * 24
+          parseInt(messageArry[3].toLowerCase().replace("d", "")) * 24
         );
         //   Weeks
       } else if (messageArry[3].toLowerCase().endsWith("w")) {
         expireTime = now.addHours(
-          parseInt(messageArry[3].toLowerCase().replace("h", "")) * 7 * 24
+          parseInt(messageArry[3].toLowerCase().replace("w", "")) * 7 * 24
         );
       } else {
         //   Return syntax (only can use h = Hours, d = Days, w = Weeks)
-
         return false;
       }
-
       // Add role to user
-      db.add(`users.${userMention.id}.hides`, hideCategory);
+      db.set(`users.${userMention.id}.hides.${hideCategory}`, true);
       db.set(`users.${userMention.id}.${hideCategory}.expire`, expireTime);
+
       const roleID = db.get(`roles.${hideCategory}`);
-      userMention.roles.add(roleID);
+      const findUser = message.guild.members.cache.get(userMention.id);
+
+      findUser.roles.add([roleID]);
     }
   },
 };

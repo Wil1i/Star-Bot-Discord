@@ -4,6 +4,7 @@ module.exports = {
   check() {
     var expiredUsersList = [];
     const users = dataBase.get("users");
+    if (!users) return false;
     for (let user of Object.keys(users)) {
       var categorys = {
         grate: false,

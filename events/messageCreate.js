@@ -15,7 +15,6 @@ module.exports = {
 
     if (index.cmd.check(cmd)) {
       const grabCommand = index.cmd.get(cmd);
-      console.log(grabCommand);
       if (!grabCommand.permissions) return grabCommand.execute(client, message);
 
       const isCommandAvailable = library.permissions.check(message, [
@@ -23,8 +22,5 @@ module.exports = {
       ]);
       if (isCommandAvailable) return grabCommand.execute(client, message);
     }
-
-    if (client.events.has("messageCreate"))
-      client.events.get("messageCreate").execute(client, message);
   },
 };
