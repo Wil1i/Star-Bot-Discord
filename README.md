@@ -8,8 +8,8 @@
 - [ ] Complete `events > guildMemberAdd`
 - [ ] Complete `commands > hide`
 - [ ] Move commands to Slash-Commands
-- [ ] Add command `mute` (No-Role) (Description in DM)
-- [ ] Sync mute command to database, if use rejoined automaticly give roles
+- [x] Add command `mute` (No-Role) (Description in DM)
+- [x] Sync mute command to database, if use rejoined automaticly give roles
 - [ ] When a user server-muted , save this to database for fix leave/join bug (if user leave from server and join again, user will be unServer mute)
 
 ## Library
