@@ -9,10 +9,6 @@ module.exports = {
     if (db.has("webhooks.noRolesLog"))
       webhookURL = db.get("webhooks.noRolesLog").toString();
 
-    db.set(
-      "webhooks.noRolesLog",
-      "https://discord.com/api/webhooks/921046608647442433/LJD_RS7Y-ZXg5JnZr-b1BB6hQht637JZE5A6t5Xq3U4Mmlp3rNwJT57UV__qXSAmx1rd"
-    );
     const findGuild = client.guilds.cache.get(db.get("guilds.main").toString());
     const findExecutor = findGuild.members.cache.get(executor.executor.id);
     const noRoleEmbed = new MessageEmbed()

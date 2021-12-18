@@ -6,7 +6,6 @@ module.exports = {
   description: "When bot is ready to use",
   execute(client) {
     function removeHide(client, categoryName, userData) {
-      db.set("guilds.main", "920974335840223242");
       const guild = client.guilds.cache.get(db.get("guilds.main").toString());
       console.log(userData);
       const findUser = guild.members.cache.get(userData.user);
