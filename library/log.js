@@ -14,7 +14,10 @@ module.exports = {
     const noRoleEmbed = new MessageEmbed()
       .setColor(db.get("bot.colors.log"))
       .setFooter(db.get("embeds.footer"))
-      .setAuthor("NO ROLES Log", user.user.displayAvatarURL({ dynamic: true }))
+      .setAuthor(
+        "Log | No-Roles rmeoved without command",
+        user.user.displayAvatarURL({ dynamic: true })
+      )
       .addField(
         `Username`,
         `${findExecutor.user.username} | <@${findExecutor.user.id}>`,
@@ -33,6 +36,7 @@ module.exports = {
       username: client.user.username,
       avatarURL: client.user.displayAvatarURL(),
       embeds: [noRoleEmbed],
+      content: `admin-${message.author.id}\nuser-${userMention.id}`,
     });
   },
 
@@ -56,6 +60,41 @@ module.exports = {
       username: client.user.username,
       avatarURL: client.user.displayAvatarURL(),
       embeds: [hideExpiredEmbed],
+    });
+  },
+
+  noRoleAdd(client, executor, user, roleID, reason) {
+    let webhookURL = config.webhooks.noRoleAdd || undefined;
+    if (db.has("webhooks.noRoleAdd"))
+      webhookURL = db.get("webhooks.noRoleAdd").toString();
+
+    const noRoleEmbed = new MessageEmbed()
+      .setColor(db.get("bot.colors.log"))
+      .setFooter(db.get("embeds.footer"))
+      .setAuthor(
+        "Log | No-Role Added",
+        user.displayAvatarURL({ dynamic: true })
+      )
+      .addField(
+        `Username`,
+        `${executor.author.username} | <@${executor.author.id}>`,
+        true
+      )
+      .addField(`Added for`, `${user.tag} | <@${user.id}>`, true)
+      .addField(`Role`, `<@&${roleID}>`, true)
+      .addField(`Reason`, reason.toString(), true)
+      .setThumbnail(
+        executor.author.displayAvatarURL({ size: 1024, dynamic: true })
+      )
+      .setTimestamp();
+
+    const noRoleWebhook = new WebhookClient({ url: webhookURL });
+
+    noRoleWebhook.send({
+      username: client.user.username,
+      avatarURL: client.user.displayAvatarURL(),
+      embeds: [noRoleEmbed],
+      content: `admin-${message.author.id}\nuser-${userMention.id}`,
     });
   },
 };

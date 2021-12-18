@@ -4,8 +4,6 @@ module.exports = {
   name: "guildMemberAdd",
   description: "Handle when new members joined in server",
   execute(client, member) {
-    console.log(`--- WHEN A USER JOINED : ID : ${member.user.id}`);
-
     // Check and update NO-ROLES for user
     const userStats = db.get(`users.${member.user.id}.hides`);
     if (userStats) {

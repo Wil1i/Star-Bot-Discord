@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { Collection } = require("discord.js");
+const { exec } = require("child_process");
 const functions = new Collection();
 
 const functionsDir = fs
@@ -41,6 +42,35 @@ let log = {
       );
 
     functions.get("log").noRolesLog({ client, executor, user, roleID });
+  },
+
+  noRoleAdd([client, executor, user, roleID, reason]) {
+    if (!client)
+      throw new Error(
+        "Enter client for noRoleAdd\nRequired : client , executor , username , roleID"
+      );
+
+    if (!executor)
+      throw new Error(
+        "Enter executor for noRoleAdd\nRequired : client , executor , username , roleID"
+      );
+
+    if (!user)
+      throw new Error(
+        "Enter user for noRoleAdd\nRequired : client , executor , username , roleID"
+      );
+
+    if (!roleID)
+      throw new Error(
+        "Enter roleID for noRoleAdd\nRequired : client , executor , username , roleID"
+      );
+
+    if (!reason)
+      throw new Error(
+        "Enter reason for noRoleAdd\nRequired : client , executor , username , roleID"
+      );
+
+    functions.get("log").noRoleAdd(client, executor, user, roleID, reason);
   },
 };
 

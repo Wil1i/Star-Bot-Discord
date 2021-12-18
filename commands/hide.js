@@ -1,4 +1,6 @@
+const { MessageEmbed } = require("discord.js");
 const db = require("quick.db");
+const library = require("../library/star");
 
 Date.prototype.addHours = function (h) {
   this.setTime(this.getTime() + h * 60 * 60 * 1000);
@@ -9,6 +11,7 @@ module.exports = {
   name: "hide",
   description: "Hide categorys using NO-Roles",
   execute(client, message) {
+    db.set("colors.main", "#0000ff");
     //   CMD category mention time reason
     const messageArry = message.content.split(" ");
     const userMention = message.mentions.users.first();
@@ -52,6 +55,19 @@ module.exports = {
       const findUser = message.guild.members.cache.get(userMention.id);
 
       findUser.roles.add([roleID]);
+
+      const embed = new MessageEmbed()
+        .setColor(db.get("colors.main").toString())
+        .setFooter(db.get("embeds.footer").toString())
+        .setDescription(
+          `User <@${userMention.id}> tavasote <@${message.author.id}> no-${hideCategory} shod.`
+        );
+
+      library.log.noRoleAdd([client, message, userMention, roleID, reason]);
+      message.delete();
+      message.channel.send({
+        embeds: [embed],
+      });
     }
   },
 };
