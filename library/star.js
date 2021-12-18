@@ -20,10 +20,26 @@ let db = {
 // Log
 let log = {
   noRolesLog(client, executor, user, roleID) {
-    if (!client || !executor || !user || !roleID)
+    if (!client)
       throw new Error(
-        "Enter correct data for noRolesLog\nRequired : client , executor , username , roleID"
+        "Enter client for noRolesLog\nRequired : client , executor , username , roleID"
       );
+
+    if (!executor)
+      throw new Error(
+        "Enter executor for noRolesLog\nRequired : client , executor , username , roleID"
+      );
+
+    if (!user)
+      throw new Error(
+        "Enter user for noRolesLog\nRequired : client , executor , username , roleID"
+      );
+
+    if (!roleID)
+      throw new Error(
+        "Enter roleID for noRolesLog\nRequired : client , executor , username , roleID"
+      );
+
     functions.get("log").noRolesLog({ client, executor, user, roleID });
   },
 };

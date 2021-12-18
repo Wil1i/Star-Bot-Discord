@@ -7,28 +7,27 @@ module.exports = {
   noRolesLog({ client, executor, user, roleID }) {
     let webhookURL = config.webhooks.noRolesLog || undefined;
     if (db.has("webhooks.noRolesLog"))
-      webhookURL = db.get("webhooks.noRolesLog");
+      webhookURL = db.get("webhooks.noRolesLog").toString();
 
+    db.set(
+      "webhooks.noRolesLog",
+      "https://discord.com/api/webhooks/921046608647442433/LJD_RS7Y-ZXg5JnZr-b1BB6hQht637JZE5A6t5Xq3U4Mmlp3rNwJT57UV__qXSAmx1rd"
+    );
+    const findGuild = client.guilds.cache.get(db.get("guilds.main").toString());
+    const findExecutor = findGuild.members.cache.get(executor.executor.id);
     const noRoleEmbed = new MessageEmbed()
       .setColor(db.get("bot.colors.log"))
       .setFooter(db.get("embeds.footer"))
-      .setAuthor(
-        "NO ROLES Log",
-        user.author.displayAvatarURL({ dynamic: true })
-      )
+      .setAuthor("NO ROLES Log", user.user.displayAvatarURL({ dynamic: true }))
       .addField(
         `Username`,
-        `${executor.author.tag} | <@${executor.author.id}>`,
+        `${findExecutor.user.username} | <@${findExecutor.user.id}>`,
         true
       )
-      .addField(
-        `Removed for`,
-        `${user.author.tag} | <@${user.author.id}>`,
-        true
-      )
+      .addField(`Removed for`, `${user.user.tag} | <@${user.user.id}>`, true)
       .addField(`Role`, `<@&${roleID}>`, true)
       .setThumbnail(
-        executor.author.displayAvatarURL({ size: 1024, dynamic: true })
+        findExecutor.user.displayAvatarURL({ size: 1024, dynamic: true })
       )
       .setTimestamp();
 
