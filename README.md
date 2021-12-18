@@ -27,6 +27,6 @@
 
 ## Library
 
-for check permission : `require("./library/star.js").permission.check()`
-for log : `require("./library/star.js").log`
-for config database : `require("./library/star.js").config.set()`
+for check permission : `require("./library/star.js").permission.check()`\
+for log : `require("./library/star.js").log`\
+for config database : `require("./library/star.js").config.set()`\
