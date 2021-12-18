@@ -2,14 +2,14 @@
 
 ## Options
 
-(Custom library)[https://github.com/Code-Williams/Star-Bot-Discord/tree/master/library] => all things using in project have library like logs and expired users and config database and...
-(Custom permissions)[https://github.com/Code-Williams/Star-Bot-Discord/blob/master/library/permission.js] => can add unlimit custom permissions and its automaticly config
-(Hide command)[https://github.com/Code-Williams/Star-Bot-Discord/blob/master/commands/hide.js] => Give users NO-ROLES (No-Grate , No-Adult and...) with expired time and reason with log
-(Time command)[https://github.com/Code-Williams/Star-Bot-Discord/blob/master/commands/time.js] => Give user expire time for NO-ROLES
-(Handle New Users)[https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/guildMemberAdd.js] => When a user rejoin to server , user automaticly get NO-ROLES have before leaving from server
-(Handle Voice Users)[https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/voiceStateUpdate.js] => When a user rejoin to server for server unmute, when joined to a voice channel automaticly server mute and server deafen
-(Automaticly config database)[https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/ready.js] => Automaticly config database when bot is ready (from config.json file)
-(Handle Messages and Custom Command Handler)[https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/messageCreate.js] => Handle all messages and have custom command handler
+[Custom library](https://github.com/Code-Williams/Star-Bot-Discord/tree/master/library) => all things using in project have library like logs and expired users and config database and...
+[Custom permissions](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/library/permission.js) => can add unlimit custom permissions and its automaticly config
+[Hide command](https://github.com/code-williams/star-bot-discord/blob/master/commands/hide.js) => Give users NO-ROLES (No-Grate , No-Adult and...) with expired time and reason with log
+[Time command](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/commands/time.js) => Give user expire time for NO-ROLES
+[Handle New Users](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/guildMemberAdd.js) => When a user rejoin to server , user automaticly get NO-ROLES have before leaving from server
+[Handle Voice Users](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/voiceStateUpdate.js) => When a user rejoin to server for server unmute, when joined to a voice channel automaticly server mute and server deafen
+[Automaticly config database](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/ready.js) => Automaticly config database when bot is ready (from config.json file)
+[Handle Messages and Custom Command Handler](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/messageCreate.js) => Handle all messages and have custom command handler
 
 ## TODO
 
