@@ -49,7 +49,20 @@ module.exports = {
               }
 
               now++;
-              member.send(text).catch(() => {});
+              member
+                .send(text)
+                .then(() => {
+                  all++;
+                  console.log(
+                    `[${all}] message sent to ${member.user.username}`
+                  );
+                })
+                .catch(() => {
+                  all++;
+                  console.log(
+                    `[${all}] Can't send message to ${member.user.username}`
+                  );
+                });
             }
           });
           message.channel.messages.fetch(messageID).then((fetched) => {
@@ -59,7 +72,6 @@ module.exports = {
               });
             }
           });
-          console.log(all);
         });
     } else if (userMention) {
       // Work with usermention
