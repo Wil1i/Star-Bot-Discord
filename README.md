@@ -9,7 +9,7 @@
 [Handle New Users](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/guildMemberAdd.js) => When a user rejoin to server , user automaticly get NO-ROLES have before leaving from server.\
 [Handle Voice Users](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/voiceStateUpdate.js) => When a user rejoin to server for server unmute, when joined to a voice channel automaticly server mute and server deafen.\
 [Automaticly config database](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/ready.js) => Automaticly config database when bot is ready (from config.json file).\
-[Handle Messages and Custom Command Handler](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/messageCreate.js) => Handle all messages and have custom command handler.\
+[Handle Messages and Custom Command Handler](https://github.com/Code-Williams/Star-Bot-Discord/blob/master/events/messageCreate.js) => Handle all messages and have custom command handler.
 
 ## TODO
 
@@ -29,4 +29,4 @@
 
 for check permission : `require("./library/star.js").permission.check()`\
 for log : `require("./library/star.js").log`\
-for config database : `require("./library/star.js").config.set()`\
+for config database : `require("./library/star.js").config.set()`
