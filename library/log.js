@@ -46,7 +46,7 @@ module.exports = {
       webhookURL = db.get("webhooks.hideExpired");
 
     const hideExpiredEmbed = new MessageEmbed()
-      .setColor(db.get("bot.colors.log"))
+      .setColor(db.get("colors.log"))
       .setFooter(db.get("embeds.footer"))
       .setAuthor("Hide Expired")
       .addField("Username", user.author.id, true)
@@ -69,7 +69,7 @@ module.exports = {
       webhookURL = db.get("webhooks.noRoleAdd").toString();
 
     const noRoleEmbed = new MessageEmbed()
-      .setColor(db.get("bot.colors.log"))
+      .setColor(db.get("colors.log"))
       .setFooter(db.get("embeds.footer"))
       .setAuthor(
         "Log | No-Role Added",
@@ -95,6 +95,36 @@ module.exports = {
       avatarURL: client.user.displayAvatarURL(),
       embeds: [noRoleEmbed],
       content: `admin-${message.author.id}\nuser-${userMention.id}`,
+    });
+  },
+
+  voice(client, user, channel, state) {
+    let webhookURL = config.webhooks.voice || undefined;
+    let isVoiceLogEnable = db.get("log.voice") || false;
+    if (!isVoiceLogEnable) return;
+
+    if (db.has("webhooks.voice"))
+      webhookURL = db.get("webhooks.voice").toString();
+
+    const voiceEmbed = new MessageEmbed()
+      .setColor(db.get("colors.log"))
+      .setFooter(db.get("embeds.footer"))
+      .setAuthor("Log | Voice State Update");
+
+    if (state == "join") {
+      voiceEmbed.setDescription(
+        `User <@${user}> joined to voice channel <#${channel}>`
+      );
+    } else if (state == "leave") {
+      voiceEmbed.setDescription(
+        `User <@${user}> leaved from voice channel <#${channel}>`
+      );
+    }
+
+    webhookURL.send({
+      username: client.user.username,
+      avatarURL: client.user.displayAvatarURL(),
+      embeds: [voiceEmbed],
     });
   },
 };

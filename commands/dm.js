@@ -41,7 +41,7 @@ module.exports = {
           messageID = msg.id;
 
           message.guild.members.cache.forEach((member) => {
-            if (!member.bot) {
+            if (!member.user.bot) {
               if (now == 5) {
                 setTimeout(() => {
                   now = 0;

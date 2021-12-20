@@ -1,4 +1,5 @@
 const db = require("quick.db");
+const library = require("../library/star");
 
 module.exports = {
   name: "voiceStateUpdate",
@@ -46,6 +47,18 @@ module.exports = {
       } else if (newState.serverDeafen && !isUserServerDeafen) {
         db.set(`users.${newState.id}.deafen`, true);
       }
+    }
+
+    // !-------------------------------------------
+
+    if (!oldState.channel && newState.channel.id) {
+      // User joined to a voice channel [get a log]
+      library.log.voice(client, newState.id, newState.channel.id, "join");
+    }
+
+    if (oldState.channel && !newState.channel) {
+      // User leaved from a voice channel [get a log]
+      library.log.voice(client, newState.id, oldState.channel.id, "leave");
     }
   },
 };
