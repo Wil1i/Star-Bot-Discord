@@ -7,16 +7,11 @@ module.exports = {
   execute(client) {
     function removeHide(client, categoryName, userData) {
       const guild = client.guilds.cache.get(db.get("guilds.main").toString());
-      console.log(userData);
       const findUser = guild.members.cache.get(userData.user);
       const roleID = db.get(`roles.${categoryName}`);
-      console.log(
-        `Cateogry name is ${db.has(
-          `users.${userData.user}.hides.${categoryName}`
-        )}`
-      );
       db.delete(`users.${userData.user}.hides.${categoryName}`);
       db.delete(`users.${userData.user}.${categoryName}.expire`);
+      console.log(findUser);
       findUser.roles.remove(roleID);
       library.log.hideExpired({ client, findUser, roleID, categoryName });
     }

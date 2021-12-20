@@ -72,6 +72,15 @@ let log = {
 
     functions.get("log").noRoleAdd(client, executor, user, roleID, reason);
   },
+
+  hideExpired({ client, user, roleID, categoryName }) {
+    if (!client) console.log("client");
+    if (!user) console.log("user");
+    if (!roleID) console.log("roleID");
+    if (!categoryName) console.log("categoryName");
+    if (!client || !user || !roleID || !categoryName)
+      throw new Error(`Enter a correct value for hideExpired`);
+  },
 };
 
 // Permission
