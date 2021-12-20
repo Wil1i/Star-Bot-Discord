@@ -4,6 +4,7 @@ const db = require("quick.db");
 module.exports = {
   name: "dm",
   description: "Send dm to target users",
+  permissions: ["ADMINISTRATOR"],
   execute(client, message) {
     const embed = new MessageEmbed()
       .setColor(db.get("colors.main"))

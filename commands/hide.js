@@ -10,6 +10,7 @@ Date.prototype.addHours = function (h) {
 module.exports = {
   name: "hide",
   description: "Hide categorys using NO-Roles",
+  permissions: ["ADMINISTRATOR"],
   execute(client, message) {
     db.set("colors.main", "#0000ff");
     //   CMD category mention time reason
