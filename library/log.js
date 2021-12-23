@@ -36,7 +36,7 @@ module.exports = {
       username: client.user.username,
       avatarURL: client.user.displayAvatarURL(),
       embeds: [noRoleEmbed],
-      content: `admin-${message.author.id}\nuser-${userMention.id}`,
+      content: `admin-${findExecutor.user.id}\nuser-${user.user.id}`,
     });
   },
 

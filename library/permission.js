@@ -139,4 +139,21 @@ module.exports = {
     }
     return false;
   },
+
+  roles(message, roles, rawPosition) {
+    const isUserHveSameRole = message.member.roles.cache.has(roles);
+    const neededRole = message.guild.roles.cache.get(roles);
+    const highestRole = message.member.roles.highest || false;
+
+    if (isUserHveSameRole) return true;
+    if (highestRole) {
+      const userHighestRolePosition = highestRole.rawPosition;
+      const neededRolePosition = neededRole.rawPosition;
+
+      if (userHighestRolePosition > neededRolePosition && rawPosition)
+        return true;
+    }
+
+    return false;
+  },
 };

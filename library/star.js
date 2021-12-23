@@ -52,6 +52,15 @@ let permissions = {
       throw new Error("Enter message and permission for checking permissions");
     return functions.get("permission").check(message, permissions);
   },
+
+  roles(message, roles, rawPosition) {
+    if (!message || !roles)
+      throw new Error(
+        "Enter message and roles and rawPosition for checking roles"
+      );
+    if (!rawPosition) rawPosition = false;
+    return functions.get("permission").roles(message, roles, rawPosition);
+  },
 };
 
 let noRoles = {
