@@ -94,7 +94,7 @@ module.exports = {
       username: client.user.username,
       avatarURL: client.user.displayAvatarURL(),
       embeds: [noRoleEmbed],
-      content: `admin-${message.author.id}\nuser-${userMention.id}`,
+      content: `admin-${executor.author.id}-\nuser-${user.id}-`,
     });
   },
 
