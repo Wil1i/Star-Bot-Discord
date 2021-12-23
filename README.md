@@ -34,3 +34,10 @@
 for check permission : `require("./library/star.js").permission.check()`\
 for log : `require("./library/star.js").log`\
 for config database : `require("./library/star.js").config.set()`
+
+## Help
+
+if you want to enable rawPosition for role permissions in a command after roles add `rawPosition : true,` in `module.exports`\
+if you want to users who have higher role than selected role have access to command, add `rawPosition : true,` in `module.exports`\
+for add permissions on a command add with list `["ADMINISTRATOR", ...]`\
+for add roles permission on a command add with string `ROLE_ID`\
