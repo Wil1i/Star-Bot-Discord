@@ -29,6 +29,7 @@ module.exports = {
               Entry = AuditLogFetch.entries.first();
             } catch {}
 
+            if (Entry.executor.id == client.user.id) return;
             newMember.roles.add(role.id);
             if (Entry.executor.id == client.user.id) return;
             library.log.noRolesLog(client, Entry, newMember, role.id);
