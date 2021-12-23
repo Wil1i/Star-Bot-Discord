@@ -23,7 +23,11 @@
 - [x] Sync mute command to database, if use rejoined automaticly give roles
 - [x] When a user server-muted , save this to database for fix leave/join bug (if user leave from server and join again, user will be server unmute)
 - [x] When a user removed no role from another user, cancel event
-- [ ] Complete time command
+- [x] Complete time command
+- [ ] Role Picker (Can pick roles with buttons)
+- [ ] TTS in connect to admin (when a user joined to connect to admin channel, play welcome tts)
+- [ ] Voice Alert (when a user joined to some voice channels, a log will be send to admins)
+- [ ] ANN to admins (when a announcement sent to admins, ann send to admin's dm)
 
 ## Library
 
