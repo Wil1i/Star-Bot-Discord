@@ -2,11 +2,6 @@ const { MessageEmbed } = require("discord.js");
 const db = require("quick.db");
 const library = require("../library/star");
 
-Date.prototype.addHours = function (h) {
-  this.setTime(this.getTime() + h * 60 * 60 * 1000);
-  return this;
-};
-
 module.exports = {
   name: "hide",
   description: "Hide categorys using NO-Roles",
