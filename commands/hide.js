@@ -12,7 +12,6 @@ module.exports = {
   description: "Hide categorys using NO-Roles",
   permissions: ["ADMINISTRATOR"],
   execute(client, message) {
-    db.set("colors.main", "#0000ff");
     //   CMD category mention time reason
     const messageArry = message.content.split(" ");
     const userMention = message.mentions.users.first();
@@ -22,50 +21,37 @@ module.exports = {
         ""
       );
       const hideCategory = messageArry[1].toLowerCase();
-      const availableHides = ["grate", "adult", "game"];
+      const availableHides = ["grate", "adult", "game", "mafia"];
       // If hide category is not any item is available in availableHides dont do anything else continue
       if (!availableHides.includes(hideCategory)) return;
-      // Add role to user
-      //   Time by day
       const now = new Date();
-      let expireTime = now;
-      //   Hours
-      if (messageArry[3].toLowerCase().endsWith("h")) {
-        expireTime = now.addHours(
-          parseInt(messageArry[3].toLowerCase().replace("h", ""))
-        );
-        // Days
-      } else if (messageArry[3].toLowerCase().endsWith("d")) {
-        expireTime = now.addHours(
-          parseInt(messageArry[3].toLowerCase().replace("d", "")) * 24
-        );
-        //   Weeks
-      } else if (messageArry[3].toLowerCase().endsWith("w")) {
-        expireTime = now.addHours(
-          parseInt(messageArry[3].toLowerCase().replace("w", "")) * 7 * 24
-        );
-      } else {
-        //   Return syntax (only can use h = Hours, d = Days, w = Weeks)
-        return false;
-      }
-      // Add role to user
-      db.set(`users.${userMention.id}.hides.${hideCategory}`, true);
-      db.set(`users.${userMention.id}.${hideCategory}.expire`, expireTime);
-
+      now.setDate(now.getDate() + parseInt(messageArry[3]));
+      // find role id for messagearry[1]
       const roleID = db.get(`roles.${hideCategory}`);
+      // find user in server
       const findUser = message.guild.members.cache.get(userMention.id);
 
+      // Set expire time to database
+      db.set(`users.${userMention.id}.${hideCategory}.expire`, now);
+
+      // Add No-Role to mentioned user
       findUser.roles.add([roleID]);
 
+      // Create embed for response in same channel
       const embed = new MessageEmbed()
         .setColor(db.get("colors.main").toString())
         .setFooter(db.get("embeds.footer").toString())
         .setDescription(
-          `User <@${userMention.id}> tavasote <@${message.author.id}> no-${hideCategory} shod.`
+          `User <@${userMention.id}> Tavasote <@${message.author.id}> No-${hideCategory} Shod Baraye **${messageArry[3]}** Rooz.\n\n**Reason** : ${reason}`
         );
 
+      // Send No-Role-Add log
       library.log.noRoleAdd([client, message, userMention, roleID, reason]);
+
+      // Delete message for user
       message.delete();
+
+      // Send response
       message.channel.send({
         embeds: [embed],
       });
