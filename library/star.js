@@ -50,7 +50,7 @@ let permissions = {
   check(message, permissions) {
     if (!message || !permissions)
       throw new Error("Enter message and permission for checking permissions");
-    functions.get("permission").check(message, permissions);
+    return functions.get("permission").check(message, permissions);
   },
 };
 
