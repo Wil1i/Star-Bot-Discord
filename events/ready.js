@@ -9,10 +9,8 @@ module.exports = {
       const guild = client.guilds.cache.get(db.get("guilds.main").toString());
       const findUser = guild.members.cache.get(userData.user);
       const roleID = db.get(`roles.${categoryName}`);
-      db.delete(`users.${userData.user}.hides.${categoryName}`);
       db.delete(`users.${userData.user}.${categoryName}.expire`);
-      console.log(findUser);
-      findUser.roles.remove(roleID);
+      findUser.roles.remove([roleID]);
       library.log.hideExpired({ client, findUser, roleID, categoryName });
     }
 
@@ -27,12 +25,12 @@ module.exports = {
       }
     }
 
-    console.log(`Bot ${client.user.tag} is now ready to use`);
-
     library.db.config();
+    console.log(`Bot ${client.user.tag} is now ready to use`);
 
     updateExpiredUsers(client);
     setInterval(() => {
+      console.log("[NO-ROLES] Cheking Expired Users...");
       updateExpiredUsers(client);
     }, 10800000);
   },
