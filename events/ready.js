@@ -21,6 +21,7 @@ module.exports = {
           if (userData.grate) removeHide(client, "grate", userData);
           if (userData.adult) removeHide(client, "adult", userData);
           if (userData.game) removeHide(client, "game", userData);
+          if (userData.mafia) removeHide(client, "mafia", userData);
         }
       }
     }

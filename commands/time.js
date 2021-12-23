@@ -6,7 +6,7 @@ module.exports = {
   description: "Get remaining time for no-role",
   execute(client, message) {
     let mutedCount = 0;
-    const allNoCategorys = ["adult", "grate", "game"];
+    const allNoCategorys = ["adult", "grate", "game", "mafia"];
     const userMention = message.mentions.users.first();
     const embed = new MessageEmbed()
       .setColor(db.get("colors.main"))

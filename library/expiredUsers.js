@@ -11,28 +11,19 @@ module.exports = {
         adult: false,
         game: false,
       };
-      const grateExpire = dataBase.get(`users.${user}.grate.expire`) || false;
-      const adultExpire = dataBase.get(`users.${user}.adult.expire`) || false;
-      const gameExpire = dataBase.get(`users.${user}.game.expire`) || false;
 
+      const categorysDef = ["grate", "adult", "game", "mafia"];
       const nowDate = new Date();
 
-      if (grateExpire) {
-        const grateExpireDate = new Date(grateExpire);
-        const grateRemainingTime = grateExpireDate - nowDate;
-        if (grateRemainingTime < 1) categorys["grate"] = true;
-      }
+      for (const category of categorysDef) {
+        const expire =
+          dataBase.get(`users.${user}.${category}.expire`) || false;
 
-      if (adultExpire) {
-        const adultExpireDate = new Date(adultExpire);
-        const adultRemainingTime = adultExpireDate - nowDate;
-        if (adultRemainingTime < 1) categorys["adult"] = true;
-      }
-
-      if (gameExpire) {
-        const gameExpireDate = new Date(gameExpire);
-        const gameRemainingTime = gameExpireDate - nowDate;
-        if (gameRemainingTime < 1) categorys["game"] = true;
+        if (expire) {
+          const expireDate = new Date(expire);
+          const remainingTime = expireDate - nowDate;
+          if (remainingTime < 1) categorys[category] = true;
+        }
       }
 
       expiredUsersList.push({
