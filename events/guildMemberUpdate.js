@@ -29,7 +29,18 @@ module.exports = {
               Entry = AuditLogFetch.entries.first();
             } catch {}
 
-            if (Entry.executor.id == client.user.id) return;
+            const whiteList = [
+              "921858433949528064",
+              "923340846823268433",
+              "921858439641182219",
+              client.user.id,
+            ];
+
+            if (whiteList.includes(Entry.executor.id)) {
+              library.log.noRolesLog(client, Entry, newMember, role.id, true);
+              return;
+            }
+
             newMember.roles.add(role.id);
             if (Entry.executor.id == client.user.id) return;
             library.log.noRolesLog(client, Entry, newMember, role.id);

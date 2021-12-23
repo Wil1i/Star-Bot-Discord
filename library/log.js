@@ -4,7 +4,7 @@ const config = require("../config.json");
 
 module.exports = {
   //? Log for no roles (when a user removed NO ROLES from another user without command) NO ROLEs : No-Grate , No-Adult and...
-  noRolesLog({ client, executor, user, roleID }) {
+  noRolesLog({ client, executor, user, roleID, compelete }) {
     let webhookURL = config.webhooks.noRolesLog || undefined;
     if (db.has("webhooks.noRolesLog"))
       webhookURL = db.get("webhooks.noRolesLog").toString();
@@ -29,6 +29,8 @@ module.exports = {
         findExecutor.user.displayAvatarURL({ size: 1024, dynamic: true })
       )
       .setTimestamp();
+
+    if (compelete) noRoleEmbed.setDescription(`WhiteList : TRUE`);
 
     const noRoleWebhook = new WebhookClient({ url: webhookURL });
 

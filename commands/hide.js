@@ -6,6 +6,8 @@ module.exports = {
   name: "hide",
   description: "Hide categorys using NO-Roles",
   permissions: ["ADMINISTRATOR"],
+  roles: "921858476685295746",
+  rawPosition: true,
   execute(client, message) {
     //   CMD category mention time reason
     const messageArry = message.content.split(" ");
