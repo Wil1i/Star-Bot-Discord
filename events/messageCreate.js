@@ -9,14 +9,26 @@ module.exports = {
   execute(client, message) {
     if (message.author.bot || message.channel.type == "DM") return;
 
-    if (message.channel.id == "921858472679723068") {
+    if (
+      message.channel.id == "921858472679723068" &&
+      message.content.toLowerCase().startsWith("!bug")
+    ) {
       message.delete();
+      const bugChannel = client.channels.cache.get("921858474336473148");
       const embed = new MessageEmbed()
         .setColor("RANDOM")
         .setFooter("Atlantis")
-        .setDescription(message.content)
+        .setDescription(message.content.replace(`!bug`, ""))
         .setAuthor("New Bug Report");
-      message.channel.send({ embed: embed });
+      bugChannel
+        .send({
+          content: `||<@&921858423195308113> <@&922552262562295808>|| ${message.author}**'s bug report**`,
+          embeds: [embed],
+        })
+        .then(async (msg) => {
+          await msg.react(`<a:x_x:923960662756053032>`);
+          await msg.react(`<a:x_y:923960664349896725>`);
+        });
     }
 
     const messageArry = message.content.split(" ");
