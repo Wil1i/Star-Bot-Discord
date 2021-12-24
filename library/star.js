@@ -19,11 +19,11 @@ let db = {
 
 // Log
 let log = {
-  noRolesLog(client, executor, user, roleID) {
+  noRolesLog(client, executor, user, roleID, compelete) {
     if (!client || !executor || !user || !roleID)
       throw new Error("Enter a correct value for noRolesLog");
 
-    functions.get("log").noRolesLog({ client, executor, user, roleID });
+    functions.get("log").noRolesLog({ client, executor, user, roleID, compelete });
   },
 
   noRoleAdd([client, executor, user, roleID, reason]) {

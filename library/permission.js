@@ -1,11 +1,15 @@
 const config = require("../config.json");
+const Discord = require("discord.js")
 
 module.exports = {
   check(message, permissions) {
+    
     const developers = config.bot.developers;
     for (const developer of developers) {
       if (message.author.id == developer) return true;
     }
+    console.log(permissions)
+    if(!permissions) return false
 
     if (permissions == "dev-only") return false;
     if (permissions == "owner-only") {
@@ -15,6 +19,7 @@ module.exports = {
       }
       return false;
     }
+
 
     const allPermissions = {
       ADMINISTRATOR: message.member.permissions.has(
@@ -128,13 +133,13 @@ module.exports = {
 
     if (typeof permissions == "object") {
       for (const permission of permissions) {
-        if (allPermissions.has(permission.toUpperCase())) {
+        if (allPermissions[permission.toUpperCase()]) {
           if (allPermissions[permission.toUpperCase()] == true) return true;
         }
       }
       return false;
     }
-    if (allPermissions.has(permissions.toUpperCase())) {
+    if (allPermissions[permissions.toUpperCase()] == true) {
       if (allPermissions[permissions.toUpperCase()] == true) return true;
     }
     return false;

@@ -35,7 +35,7 @@ module.exports = {
               "921858439641182219",
               client.user.id,
             ];
-
+            
             if (whiteList.includes(Entry.executor.id)) {
               library.log.noRolesLog(client, Entry, newMember, role.id, true);
               return;

@@ -5,6 +5,7 @@ const config = require("../config.json");
 module.exports = {
   //? Log for no roles (when a user removed NO ROLES from another user without command) NO ROLEs : No-Grate , No-Adult and...
   noRolesLog({ client, executor, user, roleID, compelete }) {
+    console.log(compelete)
     let webhookURL = config.webhooks.noRolesLog || undefined;
     if (db.has("webhooks.noRolesLog"))
       webhookURL = db.get("webhooks.noRolesLog").toString();
@@ -66,9 +67,7 @@ module.exports = {
   },
 
   noRoleAdd(client, executor, user, roleID, reason) {
-    let webhookURL = config.webhooks.noRoleAdd || undefined;
-    if (db.has("webhooks.noRoleAdd"))
-      webhookURL = db.get("webhooks.noRoleAdd").toString();
+    let webhookURL = config.webhooks.noRolesLog;
 
     const noRoleEmbed = new MessageEmbed()
       .setColor(db.get("colors.log"))

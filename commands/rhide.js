@@ -6,6 +6,7 @@ module.exports = {
   description: "Remove hide from users",
   permissions: ["ADMINISTRATOR"],
   execute(client, message) {
+    message.delete()
     //   CMD category mention reason
     const userMention = message.mentions.users.first();
     const messageArry = message.content.split(" ");
@@ -34,7 +35,7 @@ module.exports = {
       const findUser = message.guild.members.cache.get(userMention.id);
       if (findUser) {
         if (findUser.roles.cache.has(roleID))
-          findUser.roles.remove(["921047050211196968"]);
+          findUser.roles.remove([roleID]);
       }
       //   Done embed
       rHideEmbed.setDescription(

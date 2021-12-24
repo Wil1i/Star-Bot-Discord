@@ -1,6 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const db = require("quick.db");
 const library = require("../library/star");
+const config = require("../config.json")
 
 module.exports = {
   name: "hide",
@@ -43,6 +44,7 @@ module.exports = {
         );
 
       // Send No-Role-Add log
+      console.log(roleID)
       library.log.noRoleAdd([client, message, userMention, roleID, reason]);
 
       // Delete message for user
