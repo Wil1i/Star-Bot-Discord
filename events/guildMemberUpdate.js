@@ -35,7 +35,10 @@ module.exports = {
               "921858439641182219",
               client.user.id,
             ];
-            
+
+            // Age user ba command role ro remove kone be jae user bot role ro remove mikone va tooe log id e bot miofte, log e user ro ghesmate use kardane command ok shod va client ham inja baste shod
+            if (Entry.executor.id == client.user.id) return;
+
             if (whiteList.includes(Entry.executor.id)) {
               library.log.noRolesLog(client, Entry, newMember, role.id, true);
               return;
