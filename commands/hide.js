@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const db = require("quick.db");
 const library = require("../library/star");
-const config = require("../config.json")
+const config = require("../config.json");
 
 module.exports = {
   name: "hide",
@@ -25,7 +25,7 @@ module.exports = {
       const now = new Date();
       now.setDate(now.getDate() + parseInt(messageArry[3]));
       // find role id for messagearry[1]
-      const roleID = db.get(`roles.${hideCategory}`);
+      const roleID = config.roles[hideCategory];
       // find user in server
       const findUser = message.guild.members.cache.get(userMention.id);
 
@@ -44,7 +44,7 @@ module.exports = {
         );
 
       // Send No-Role-Add log
-      console.log(roleID)
+      console.log(roleID);
       library.log.noRoleAdd([client, message, userMention, roleID, reason]);
 
       // Delete message for user

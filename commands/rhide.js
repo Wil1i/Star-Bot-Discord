@@ -27,7 +27,7 @@ module.exports = {
     }
 
     const findUser = message.guild.members.cache.get(userMention.id);
-    const roleID = db.get(`roles.${messageArry[1].toLowerCase()}`);
+    const roleID = config.roles[messageArry[1].toLowerCase()];
 
     if (
       db.has(`users.${userMention.id}.${messageArry[1].toLowerCase()}.expire`)
@@ -35,11 +35,48 @@ module.exports = {
       db.delete(
         `users.${userMention.id}.${messageArry[1].toLowerCase()}.expire`
       );
+
       if (findUser) findUser.roles.remove([roleID]);
       //   Done embed
       rHideEmbed.setDescription(
         `Successfully **${messageArry[1]}** Removed From ${userMention}`
       );
+
+      message.channel.send({ embeds: [rHideEmbed] });
+
+      // Log to losPunishment
+      const webhook = new WebhookClient({
+        url: config.webhooks.losePunishment,
+      });
+      const embed = new MessageEmbed()
+        .setAuthor(
+          `Log | No-Roles removed with command`,
+          findUser.user.displayAvatarURL({ dynamic: true })
+        )
+        .setThumbnail(
+          message.author.displayAvatarURL({ dynamic: true, size: 1024 })
+        )
+        .addField(
+          "Username",
+          `${message.author.username} | ${message.author}`,
+          true
+        )
+        .addField(
+          "Removed for",
+          `${findUser.user.username} | ${findUser.user}`,
+          true
+        )
+        .addField("Role", `<@&${roleID}>`, true)
+        .setFooter(config.embeds.footer)
+        .setTimestamp();
+
+      webhook.send({
+        username: client.user.username,
+        avatarURL: client.user.displayAvatarURL(),
+        embeds: [embed],
+      });
+
+      return;
     } else {
       // User is not hide from target category
       if (findUser) {
