@@ -5,10 +5,7 @@ const config = require("../config.json");
 module.exports = {
   //? Log for no roles (when a user removed NO ROLES from another user without command) NO ROLEs : No-Grate , No-Adult and...
   noRolesLog({ client, executor, user, roleID, compelete }) {
-    console.log(compelete)
-    let webhookURL = config.webhooks.noRolesLog || undefined;
-    if (db.has("webhooks.noRolesLog"))
-      webhookURL = db.get("webhooks.noRolesLog").toString();
+    let webhookURL = config.webhooks.losePunishment || undefined;
 
     const findGuild = client.guilds.cache.get(db.get("guilds.main").toString());
     const findExecutor = findGuild.members.cache.get(executor.executor.id);

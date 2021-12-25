@@ -1,25 +1,18 @@
 const config = require("../config.json");
-const Discord = require("discord.js")
+const Discord = require("discord.js");
 
 module.exports = {
   check(message, permissions) {
-    
     const developers = config.bot.developers;
-    for (const developer of developers) {
-      if (message.author.id == developer) return true;
-    }
-    console.log(permissions)
-    if(!permissions) return false
+    const owners = config.bot.owners;
+
+    if (developers.includes(message.author.id)) return true;
+    if (owners.includes(message.author.id)) return true;
+
+    if (!permissions) return false;
 
     if (permissions == "dev-only") return false;
-    if (permissions == "owner-only") {
-      const owners = config.bot.owners;
-      for (const owner of owners) {
-        if (message.author.id == owner) return true;
-      }
-      return false;
-    }
-
+    if (permissions == "owner-only") return false;
 
     const allPermissions = {
       ADMINISTRATOR: message.member.permissions.has(
@@ -133,31 +126,25 @@ module.exports = {
 
     if (typeof permissions == "object") {
       for (const permission of permissions) {
-        if (allPermissions[permission.toUpperCase()]) {
-          if (allPermissions[permission.toUpperCase()] == true) return true;
-        }
+        if (allPermissions[permission.toUpperCase()] == true) return true;
       }
       return false;
     }
-    if (allPermissions[permissions.toUpperCase()] == true) {
-      if (allPermissions[permissions.toUpperCase()] == true) return true;
-    }
+
+    if (allPermissions[permissions.toUpperCase()] == true) return true;
+
     return false;
   },
 
   roles(message, roles, rawPosition) {
-    const isUserHveSameRole = message.member.roles.cache.has(roles);
-    const neededRole = message.guild.roles.cache.get(roles);
-    const highestRole = message.member.roles.highest || false;
+    if (message.member.roles.cache.has(roles)) return true;
+    if (!rawPosition) return false;
 
-    if (isUserHveSameRole) return true;
-    if (highestRole) {
-      const userHighestRolePosition = highestRole.rawPosition;
-      const neededRolePosition = neededRole.rawPosition;
+    const userHighestRolePosition =
+      message.member.roles.highest.rawPosition || false;
+    const neededRolePosition = message.guild.roles.cache.get(roles).rawPosition;
 
-      if (userHighestRolePosition > neededRolePosition && rawPosition)
-        return true;
-    }
+    if (userHighestRolePosition > neededRolePosition) return true;
 
     return false;
   },
