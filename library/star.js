@@ -23,7 +23,9 @@ let log = {
     if (!client || !executor || !user || !roleID)
       throw new Error("Enter a correct value for noRolesLog");
 
-    functions.get("log").noRolesLog({ client, executor, user, roleID, compelete });
+    functions
+      .get("log")
+      .noRolesLog({ client, executor, user, roleID, compelete });
   },
 
   noRoleAdd([client, executor, user, roleID, reason]) {
@@ -33,8 +35,12 @@ let log = {
   },
 
   hideExpired({ client, user, roleID, categoryName }) {
+    if (!user) throw new Error("user !");
+    if (!roleID) throw new Error("role !");
+    if (!categoryName) throw new Error("category name !");
     if (!client || !user || !roleID || !categoryName)
-      throw new Error(`Enter a correct value for hideExpired`);
+      console.log("enter a correct value !");
+    // throw new Error(`Enter a correct value for hideExpired`);
     functions.get("log").hideExpired({ client, user, roleID, categoryName });
   },
 

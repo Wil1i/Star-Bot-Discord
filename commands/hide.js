@@ -14,6 +14,20 @@ module.exports = {
     const messageArry = message.content.split(" ");
     const userMention = message.mentions.users.first();
     if (messageArry[4] && userMention) {
+      if (
+        !parseInt(messageArry[3]) ||
+        parseInt(messageArry[3]) > 4 ||
+        parseInt(messageArry[3]) < 1
+      ) {
+        const synEmbed = new MessageEmbed()
+          .setColor(config.colors.main)
+          .setDescription(
+            `**SYNTAX** : ${config.bot.prefix}${this.name} [section] [mention] [time (1/2/3/4)] [reason]`
+          );
+        message.channel.send({ embeds: [synEmbed] });
+        return;
+      }
+
       const reason = message.content.replace(
         `${messageArry[0]} ${messageArry[1]} ${messageArry[2]} ${messageArry[3]}`,
         ""
@@ -44,7 +58,6 @@ module.exports = {
         );
 
       // Send No-Role-Add log
-      console.log(roleID);
       library.log.noRoleAdd([client, message, userMention, roleID, reason]);
 
       // Delete message for user

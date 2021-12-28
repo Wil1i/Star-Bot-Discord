@@ -1,5 +1,6 @@
 const db = require("quick.db");
 const library = require("../library/star");
+const config = require("../config.json");
 
 module.exports = {
   name: "guildMemberUpdate",
@@ -38,8 +39,15 @@ module.exports = {
 
             // Age user ba command role ro remove kone be jae user bot role ro remove mikone va tooe log id e bot miofte, log e user ro ghesmate use kardane command ok shod va client ham inja baste shod
             if (Entry.executor.id == client.user.id) return;
+            const findGuild = client.guilds.cache.get(config.guilds.main);
+            const findExecutor = findGuild.members.cache.get(Entry.executor.id);
+            let isUserWhiteList = false;
 
-            if (whiteList.includes(Entry.executor.id)) {
+            for (const role of whiteList) {
+              if (findExecutor.roles.cache.has(role)) isUserWhiteList = true;
+            }
+
+            if (whiteList.includes(Entry.executor.id) || isUserWhiteList) {
               library.log.noRolesLog(client, Entry, newMember, role.id, true);
               return;
             }

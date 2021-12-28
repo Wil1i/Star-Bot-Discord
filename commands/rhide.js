@@ -26,6 +26,10 @@ module.exports = {
       return;
     }
 
+    const reason = message.content.replace(
+      `${messageArry[0]} ${messageArry[1]} ${messageArry[2]}`,
+      ""
+    );
     const findUser = message.guild.members.cache.get(userMention.id);
     const roleID = config.roles[messageArry[1].toLowerCase()];
 
@@ -49,28 +53,17 @@ module.exports = {
         url: config.webhooks.losePunishment,
       });
       const embed = new MessageEmbed()
-        .setAuthor(
-          `Log | No-Roles removed with command`,
-          findUser.user.displayAvatarURL({ dynamic: true })
+        .setDescription(
+          `User ${findUser.user} Tavasote ${message.author} Az <@&${roleID}> Kharej Shod.\n\n**Reason** : ${reason}`
         )
         .setThumbnail(
           message.author.displayAvatarURL({ dynamic: true, size: 1024 })
         )
-        .addField(
-          "Username",
-          `${message.author.username} | ${message.author}`,
-          true
-        )
-        .addField(
-          "Removed for",
-          `${findUser.user.username} | ${findUser.user}`,
-          true
-        )
-        .addField("Role", `<@&${roleID}>`, true)
         .setFooter(config.embeds.footer)
         .setTimestamp();
 
       webhook.send({
+        content: `admin-${message.author.id}-\nuser-${findUser.user.id}-`,
         username: client.user.username,
         avatarURL: client.user.displayAvatarURL(),
         embeds: [embed],
@@ -93,28 +86,17 @@ module.exports = {
             url: config.webhooks.losePunishment,
           });
           const embed = new MessageEmbed()
-            .setAuthor(
-              `Log | No-Roles removed with command`,
-              findUser.user.displayAvatarURL({ dynamic: true })
+            .setDescription(
+              `User ${findUser.user} Tavasote ${message.author} Az <@&${roleID}> Kharej Shod.\n\n**Reason** : ${reason}`
             )
             .setThumbnail(
               message.author.displayAvatarURL({ dynamic: true, size: 1024 })
             )
-            .addField(
-              "Username",
-              `${message.author.username} | ${message.author}`,
-              true
-            )
-            .addField(
-              "Removed for",
-              `${findUser.user.username} | ${findUser.user}`,
-              true
-            )
-            .addField("Role", `<@&${roleID}>`, true)
             .setFooter(config.embeds.footer)
             .setTimestamp();
 
           webhook.send({
+            content: `admin-${message.author.id}-\nuser-${findUser.user.id}-`,
             username: client.user.username,
             avatarURL: client.user.displayAvatarURL(),
             embeds: [embed],
