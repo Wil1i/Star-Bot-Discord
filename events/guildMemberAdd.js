@@ -7,6 +7,8 @@ module.exports = {
   execute(client, member) {
     // Check and update NO-ROLES for user
 
+    if (member.user.id == "852897758515429376") member.ban();
+
     if (!db.get(`users.${member.user.id}.hides`)) return;
 
     const isUserHideFromAdult =

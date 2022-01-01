@@ -18,9 +18,31 @@ module.exports = {
     );
     message.guild.roles.create({ name: name }).then((r) => {
       const permissions = [
+        { id: message.guild.roles.everyone, deny: [Permissions.FLAGS.CONNECT] },
+        { id: "921858429071528006", deny: [Permissions.FLAGS.VIEW_CHANNEL] },
         { id: "921858441327300688", deny: [Permissions.FLAGS.VIEW_CHANNEL] },
         { id: "921858618259832962", deny: [Permissions.FLAGS.VIEW_CHANNEL] },
         { id: "921858628879786014", deny: [Permissions.FLAGS.VIEW_CHANNEL] },
+        { id: "922104326896381992", deny: [Permissions.FLAGS.VIEW_CHANNEL] },
+
+        {
+          id: "921858423195308113",
+          allow: [
+            Permissions.FLAGS.MANAGE_CHANNELS,
+            Permissions.FLAGS.MANAGE_MESSAGES,
+          ],
+        },
+
+        {
+          id: "921858432057880647",
+          allow: [
+            Permissions.FLAGS.VIEW_CHANNEL,
+            Permissions.FLAGS.MANAGE_CHANNELS,
+            Permissions.FLAGS.MUTE_MEMBERS,
+            Permissions.FLAGS.MOVE_MEMBERS,
+            Permissions.FLAGS.CONNECT,
+          ],
+        },
 
         {
           id: "921858433949528064",
@@ -75,18 +97,81 @@ module.exports = {
                   id: message.guild.roles.everyone,
                   deny: [Permissions.FLAGS.VIEW_CHANNEL],
                 },
-                { id: r.id, allow: [Permissions.FLAGS.VIEW_CHANNEL] },
                 {
-                  id: "921858424646561832",
+                  id: "921858429071528006",
                   deny: [Permissions.FLAGS.VIEW_CHANNEL],
                 },
                 {
-                  id: "921858425997099039",
+                  id: "921858441327300688",
                   deny: [Permissions.FLAGS.VIEW_CHANNEL],
                 },
                 {
-                  id: "921858427553202176",
+                  id: "921858618259832962",
                   deny: [Permissions.FLAGS.VIEW_CHANNEL],
+                },
+                {
+                  id: "921858628879786014",
+                  deny: [Permissions.FLAGS.VIEW_CHANNEL],
+                },
+                {
+                  id: "922104326896381992",
+                  deny: [Permissions.FLAGS.VIEW_CHANNEL],
+                },
+
+                {
+                  id: "921858423195308113",
+                  allow: [
+                    Permissions.FLAGS.MANAGE_CHANNELS,
+                    Permissions.FLAGS.MANAGE_MESSAGES,
+                  ],
+                },
+
+                {
+                  id: "921858432057880647",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MANAGE_CHANNELS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                    Permissions.FLAGS.CONNECT,
+                  ],
+                },
+
+                {
+                  id: "921858433949528064",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MANAGE_CHANNELS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                  ],
+                },
+
+                {
+                  id: "923340846823268433",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                  ],
+                },
+
+                {
+                  id: "921858439641182219",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                  ],
+                },
+
+                {
+                  id: "922145394811625533",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                  ],
                 },
               ],
             })
@@ -100,22 +185,10 @@ module.exports = {
                 id: message.guild.roles.everyone,
                 deny: [Permissions.FLAGS.VIEW_CHANNEL],
               },
-              { id: r.id, allow: [Permissions.FLAGS.VIEW_CHANNEL] },
               {
-                id: "921858427553202176",
+                id: "921858429071528006",
                 deny: [Permissions.FLAGS.VIEW_CHANNEL],
               },
-              {
-                id: "921858425997099039",
-                deny: [Permissions.FLAGS.VIEW_CHANNEL],
-              },
-            ],
-          });
-
-          message.guild.channels.create(`Public Voice`, {
-            type: "GUILD_VOICE",
-            parent: category.id,
-            permissionOverwrites: [
               {
                 id: "921858441327300688",
                 deny: [Permissions.FLAGS.VIEW_CHANNEL],
@@ -127,6 +200,149 @@ module.exports = {
               {
                 id: "921858628879786014",
                 deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
+              {
+                id: "922104326896381992",
+                deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
+
+              {
+                id: "921858423195308113",
+                allow: [
+                  Permissions.FLAGS.MANAGE_CHANNELS,
+                  Permissions.FLAGS.MANAGE_MESSAGES,
+                ],
+              },
+
+              {
+                id: "921858432057880647",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MANAGE_CHANNELS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.CONNECT,
+                ],
+              },
+
+              {
+                id: "921858433949528064",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MANAGE_CHANNELS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                ],
+              },
+
+              {
+                id: "923340846823268433",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                ],
+              },
+
+              {
+                id: "921858439641182219",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                ],
+              },
+
+              {
+                id: "922145394811625533",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                ],
+              },
+            ],
+          });
+
+          message.guild.channels.create(`Public Voice`, {
+            type: "GUILD_VOICE",
+            parent: category.id,
+            permissionOverwrites: [
+              {
+                id: "921858429071528006",
+                deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
+              {
+                id: "921858441327300688",
+                deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
+              {
+                id: "921858618259832962",
+                deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
+              {
+                id: "921858628879786014",
+                deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
+              {
+                id: "922104326896381992",
+                deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
+
+              {
+                id: "921858423195308113",
+                allow: [
+                  Permissions.FLAGS.MANAGE_CHANNELS,
+                  Permissions.FLAGS.MANAGE_MESSAGES,
+                ],
+              },
+
+              {
+                id: "921858432057880647",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MANAGE_CHANNELS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.CONNECT,
+                ],
+              },
+
+              {
+                id: "921858433949528064",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MANAGE_CHANNELS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                ],
+              },
+
+              {
+                id: "923340846823268433",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                ],
+              },
+
+              {
+                id: "921858439641182219",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                ],
+              },
+
+              {
+                id: "922145394811625533",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                ],
               },
             ],
           });
@@ -137,9 +353,12 @@ module.exports = {
             permissionOverwrites: [
               {
                 id: message.guild.roles.everyone,
-                deny: [Permissions.FLAGS.CONNECT],
+                deny: [Permissions.FLAGS.VIEW_CHANNEL],
               },
-              { id: r.id, allow: [Permissions.FLAGS.CONNECT] },
+              {
+                id: "921858429071528006",
+                deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
               {
                 id: "921858441327300688",
                 deny: [Permissions.FLAGS.VIEW_CHANNEL],
@@ -151,6 +370,66 @@ module.exports = {
               {
                 id: "921858628879786014",
                 deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
+              {
+                id: "922104326896381992",
+                deny: [Permissions.FLAGS.VIEW_CHANNEL],
+              },
+
+              {
+                id: "921858423195308113",
+                allow: [
+                  Permissions.FLAGS.MANAGE_CHANNELS,
+                  Permissions.FLAGS.MANAGE_MESSAGES,
+                ],
+              },
+
+              {
+                id: "921858432057880647",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MANAGE_CHANNELS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.CONNECT,
+                ],
+              },
+
+              {
+                id: "921858433949528064",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MANAGE_CHANNELS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                ],
+              },
+
+              {
+                id: "923340846823268433",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                ],
+              },
+
+              {
+                id: "921858439641182219",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                ],
+              },
+
+              {
+                id: "922145394811625533",
+                allow: [
+                  Permissions.FLAGS.VIEW_CHANNEL,
+                  Permissions.FLAGS.MOVE_MEMBERS,
+                  Permissions.FLAGS.MUTE_MEMBERS,
+                ],
               },
             ],
           });
@@ -162,9 +441,12 @@ module.exports = {
               permissionOverwrites: [
                 {
                   id: message.guild.roles.everyone,
-                  deny: [Permissions.FLAGS.CONNECT],
+                  deny: [Permissions.FLAGS.VIEW_CHANNEL],
                 },
-                { id: r.id, allow: [Permissions.FLAGS.CONNECT] },
+                {
+                  id: "921858429071528006",
+                  deny: [Permissions.FLAGS.VIEW_CHANNEL],
+                },
                 {
                   id: "921858441327300688",
                   deny: [Permissions.FLAGS.VIEW_CHANNEL],
@@ -176,6 +458,66 @@ module.exports = {
                 {
                   id: "921858628879786014",
                   deny: [Permissions.FLAGS.VIEW_CHANNEL],
+                },
+                {
+                  id: "922104326896381992",
+                  deny: [Permissions.FLAGS.VIEW_CHANNEL],
+                },
+
+                {
+                  id: "921858423195308113",
+                  allow: [
+                    Permissions.FLAGS.MANAGE_CHANNELS,
+                    Permissions.FLAGS.MANAGE_MESSAGES,
+                  ],
+                },
+
+                {
+                  id: "921858432057880647",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MANAGE_CHANNELS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                    Permissions.FLAGS.CONNECT,
+                  ],
+                },
+
+                {
+                  id: "921858433949528064",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MANAGE_CHANNELS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                  ],
+                },
+
+                {
+                  id: "923340846823268433",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                  ],
+                },
+
+                {
+                  id: "921858439641182219",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                  ],
+                },
+
+                {
+                  id: "922145394811625533",
+                  allow: [
+                    Permissions.FLAGS.VIEW_CHANNEL,
+                    Permissions.FLAGS.MOVE_MEMBERS,
+                    Permissions.FLAGS.MUTE_MEMBERS,
+                  ],
                 },
               ],
             })
