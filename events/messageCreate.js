@@ -1,6 +1,7 @@
 const db = require("quick.db");
 const index = require("../index");
 const library = require("../library/star");
+const config = require("../config.json");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
@@ -9,6 +10,7 @@ module.exports = {
   execute(client, message) {
     if (message.author.bot || message.channel.type == "DM") return;
 
+    // For bug report
     if (
       message.channel.id == "921858472679723068" &&
       message.content.toLowerCase().startsWith("!bug")
@@ -31,6 +33,22 @@ module.exports = {
         });
     }
 
+    // Channel Handler
+    //   Instagram
+    if (message.channel.id == "924690456678383686" && !messageArry[1]) {
+      message.delete();
+
+      const instagramEmbed = new MessageEmbed()
+        .setColor(config.colors.main)
+        .setFooter(config.embeds.footer)
+        .setDescription(
+          `**${message.author.username}**'s Instagram: [${message.content}](https://www.instagram.com/${message.content})`
+        );
+
+      message.channel.send({ embeds: [instagramEmbed] });
+    }
+
+    // Command Handler
     const messageArry = message.content.split(" ");
     const prefix = db.get("bot.prefix").toString();
     const cmd = messageArry[0].replace(prefix, "");
