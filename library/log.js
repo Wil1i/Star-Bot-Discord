@@ -46,12 +46,18 @@ module.exports = {
       webhookURL = db.get("webhooks.hideExpired");
 
     const hideExpiredEmbed = new MessageEmbed()
-      .setColor(db.get("colors.log"))
-      .setFooter(db.get("embeds.footer"))
+      .setColor(config.colors.log)
+      .setFooter(config.embeds.footer)
       .setAuthor("Hide Expired")
-      .addField("Username", user.author.id, true)
-      .addField("Expired", `${categoryName} | <@&${roleID}>`, true)
-      .setThumbnail(user.author.displayAvatarURL({ dynamic: true, size: 1024 }))
+      .addField("Username", user.author.id || "**-**", true)
+      .addField(
+        "Expired",
+        `${categoryName || "**-**"} | <@&${roleID || "**-**"}>`,
+        true
+      )
+      .setThumbnail(
+        user.author.displayAvatarURL({ dynamic: true, size: 1024 }) || ""
+      )
       .setTimestamp();
 
     const hideExpiredWebhook = new WebhookClient({ url: webhookURL });
