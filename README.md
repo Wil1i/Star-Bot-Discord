@@ -27,7 +27,7 @@
 - [ ] Role Picker (Can pick roles with buttons)
 - [ ] TTS in connect to admin (when a user joined to connect to admin channel, play welcome tts)
 - [ ] Voice Alert (when a user joined to some voice channels, a log will be send to admins)
-- [ ] ANN to admins (when a announcement sent to admins, ann send to admin's dm)
+- [x] ANN to admins (when a announcement sent to admins, ann send to admin's dm)
 
 ## Library
 

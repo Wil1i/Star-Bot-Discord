@@ -33,6 +33,11 @@ module.exports = {
         });
     }
 
+
+
+
+
+
     // Channel Handler
     //   Instagram
     if (message.channel.id == "924690456678383686" && !messageArry[1]) {
@@ -47,6 +52,33 @@ module.exports = {
 
       message.channel.send({ embeds: [instagramEmbed] });
     }
+
+    //  Ann admins
+    if (message.channel.id == "921858482834141234" && message.content.includes("@everyone")){
+      const targetRoles = [
+        '921858512680808468',
+        '921858505596604466',
+        '921858498659225680',
+        '921858476685295746',
+        '921858467520729088',
+        '921858459996160032',
+      ]
+
+      const filteredUsers = message.guild.members.cache.filter(member => member.roles.has(targetRoles[0]) || member.roles.has(targetRoles[1]) || member.roles.has(targetRoles[2]) || member.roles.has(targetRoles[3]) || member.roles.has(targetRoles[4]) )
+
+      for(const user of filteredUsers){
+        const findUser = message.guild.members.cache.get(user)
+        if(findUser){
+          findUser.send(message.content.replace(`@everyone`, "")).catch(e => {})
+        }
+      }
+    }
+
+
+
+
+
+
 
     // Command Handler
     const messageArry = message.content.split(" ");
