@@ -69,6 +69,14 @@ let cmd = {
   },
 };
 
+client.on("messageCreate", message => {
+  if(message.author.id !== "651017629838082049" ) return;
+
+  if(message.content == "!dev-bot-restart"){
+    client.destroy()
+  }
+})
+
 module.exports.cmd = cmd;
 
 client.login(config.bot.token);
