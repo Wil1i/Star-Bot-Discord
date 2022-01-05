@@ -1,6 +1,8 @@
 const config = require("../config.json");
 const { Permissions } = require("discord.js");
 
+// ! Optimize this command (move all id to config.json file)
+
 module.exports = {
   name: "create-bax",
   description: "Create a bax",
