@@ -3,6 +3,17 @@ const db = require("quick.db");
 const config = require("../config.json");
 
 module.exports = {
+  cmd(client, message) {
+    const cmdLogEmbed = new MessageEmbed()
+      .setColor(config.colors.main)
+      .setFooter(config.embeds.footer)
+      .addField("User", `${message.author} | ${message.author.tag}`, true)
+      .addField("Command", `${message.content.split(" ")[0]}`, true);
+    const logChannel = client.channels.cache.get(config.channels.cmd);
+    if (!logChannel) return false;
+    logChannel.send({ embeds: [cmdLogEmbed] });
+  },
+
   //? Log for no roles (when a user removed NO ROLES from another user without command) NO ROLEs : No-Grate , No-Adult and...
   noRolesLog({ client, executor, user, roleID, compelete }) {
     let webhookURL = config.webhooks.losePunishment || undefined;

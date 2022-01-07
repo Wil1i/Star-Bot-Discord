@@ -33,11 +33,6 @@ module.exports = {
         });
     }
 
-
-
-
-
-
     // Channel Handler
     //   Instagram
     if (message.channel.id == "924690456678383686" && !messageArry[1]) {
@@ -54,31 +49,37 @@ module.exports = {
     }
 
     //  Ann admins
-    if (message.channel.id == "921858482834141234" && message.content.includes("@everyone")){
+    if (
+      message.channel.id == "921858482834141234" &&
+      message.content.includes("@everyone")
+    ) {
       const targetRoles = [
-        '921858512680808468',
-        '921858505596604466',
-        '921858498659225680',
-        '921858476685295746',
-        '921858467520729088',
-        '921858459996160032',
-      ]
+        "921858512680808468",
+        "921858505596604466",
+        "921858498659225680",
+        "921858476685295746",
+        "921858467520729088",
+        "921858459996160032",
+      ];
 
-      const filteredUsers = message.guild.members.cache.filter(member => member.roles.has(targetRoles[0]) || member.roles.has(targetRoles[1]) || member.roles.has(targetRoles[2]) || member.roles.has(targetRoles[3]) || member.roles.has(targetRoles[4]) )
+      const filteredUsers = message.guild.members.cache.filter(
+        (member) =>
+          member.roles.has(targetRoles[0]) ||
+          member.roles.has(targetRoles[1]) ||
+          member.roles.has(targetRoles[2]) ||
+          member.roles.has(targetRoles[3]) ||
+          member.roles.has(targetRoles[4])
+      );
 
-      for(const user of filteredUsers){
-        const findUser = message.guild.members.cache.get(user)
-        if(findUser){
-          findUser.send(message.content.replace(`@everyone`, "")).catch(e => {})
+      for (const user of filteredUsers) {
+        const findUser = message.guild.members.cache.get(user);
+        if (findUser) {
+          findUser
+            .send(message.content.replace(`@everyone`, ""))
+            .catch((e) => {});
         }
       }
     }
-
-
-
-
-
-
 
     // Command Handler
     const messageArry = message.content.split(" ");
@@ -88,8 +89,10 @@ module.exports = {
     if (index.cmd.check(cmd)) {
       const grabCommand = index.cmd.get(cmd);
 
-      if (!grabCommand.permissions && !grabCommand.roles)
+      if (!grabCommand.permissions && !grabCommand.roles) {
+        library.log.cmd(client, message);
         return grabCommand.execute(client, message);
+      }
 
       let isCommandAvailableOnPermission = false;
       let isCommandAvailableOnRole = false;
