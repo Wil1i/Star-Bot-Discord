@@ -8,14 +8,21 @@ module.exports = {
     function removeHide(client, categoryName, userData) {
       const guild = client.guilds.cache.get(db.get("guilds.main").toString());
       const findUser = guild.members.cache.get(userData.user);
-      const roleID = db.get(`roles.${categoryName}`);
-      findUser.roles.remove(roleID.toString());
-      console.log(`Done for ${userData.user} => ${findUser.user.tag}`)
-      if(findUser.roles.cache.has(roleID.toString())){
-        library.devMsg(client, `Please remove \`${roleID.toString()}\` for user \`${findUser.user.tag}\` with id \`${userData.user}\``)
+      if(findUser){
+
+        const roleID = db.get(`roles.${categoryName}`);
+        findUser.roles.remove(roleID.toString());
+        console.log(`Done for ${userData.user} => ${findUser.user.tag}`)
+        const findUserNew = guild.members.cache.get(userData.user);
+        if(findUserNew.roles.cache.has(roleID.toString())){
+          library.devMsg(client, `Please remove \`${roleID.toString()}\` for user \`${findUser.user.tag}\` with id \`${userData.user}\``)
+        }else{
+          db.delete(`users.${userData.user}.${categoryName}.expire`);
+          library.log.hideExpired({ client, findUser, roleID, categoryName });
+        }
+
       }else{
-        db.delete(`users.${userData.user}.${categoryName}.expire`);
-        library.log.hideExpired({ client, findUser, roleID, categoryName });
+        console.log(`Can't find user ${userData.user}`)
       }
     }
 
