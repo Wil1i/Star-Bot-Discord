@@ -6,6 +6,8 @@ module.exports = {
   name: "rhide",
   description: "Remove hide from users",
   permissions: ["ADMINISTRATOR"],
+  roles : "921858449636204604",
+  rawPosition : true,
   execute(client, message) {
     message.delete();
     //   CMD category mention reason
