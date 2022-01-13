@@ -113,7 +113,10 @@ let noRoles = {
 
 
 
-
+const devMsg = (client, message) => {
+  const findDev = client.users.cache.get("651017629838082049")
+  findDev.send(message)
+}
 
 
 
@@ -122,3 +125,4 @@ module.exports.db = db;
 module.exports.log = log;
 module.exports.permissions = permissions;
 module.exports.noRoles = noRoles;
+module.exports.devMsg = devMsg;

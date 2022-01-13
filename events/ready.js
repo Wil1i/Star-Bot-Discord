@@ -9,9 +9,14 @@ module.exports = {
       const guild = client.guilds.cache.get(db.get("guilds.main").toString());
       const findUser = guild.members.cache.get(userData.user);
       const roleID = db.get(`roles.${categoryName}`);
-      db.delete(`users.${userData.user}.${categoryName}.expire`);
-      findUser.roles.remove([roleID]);
-      library.log.hideExpired({ client, findUser, roleID, categoryName });
+      findUser.roles.remove(roleID.toString());
+      console.log(`Done for ${userData.user} => ${findUser.user.tag}`)
+      if(findUser.roles.cache.has(roleID.toString())){
+        library.devMsg(client, `Please remove \`${roleID.toString()}\` for user \`${findUser.user.tag}\` with id \`${userData.user}\``)
+      }else{
+        db.delete(`users.${userData.user}.${categoryName}.expire`);
+        library.log.hideExpired({ client, findUser, roleID, categoryName });
+      }
     }
 
     function updateExpiredUsers(client) {
@@ -29,10 +34,14 @@ module.exports = {
     // library.db.config();
     console.log(`Bot ${client.user.tag} is now ready to use`);
 
-    updateExpiredUsers(client);
-    setInterval(() => {
-      console.log("[NO-ROLES] Cheking Expired Users...");
-      updateExpiredUsers(client);
-    }, 10800000);
+    // updateExpiredUsers(client);
+    // setInterval(() => {
+    //   console.log("[NO-ROLES] Cheking Expired Users...");
+    //   updateExpiredUsers(client);
+    // }, 10800000);
+
+    // const expiredUsers = library.noRoles.expiredUsers()
+    // console.log(expiredUsers)
+    updateExpiredUsers(client)
   },
 };

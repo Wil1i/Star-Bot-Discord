@@ -51,8 +51,10 @@ module.exports = {
     });
   },
 
-  hideExpired({ client, user, roleID, categoryName }) {
+  hideExpired({ client, userID, roleID, categoryName }) {
     let webhookURL = config.webhooks.hideExpired || undefined;
+    const user = client.users.cache.get(userID)
+    if(!user) return false;
     if (db.has("webhooks.hideExpired"))
       webhookURL = db.get("webhooks.hideExpired");
 
