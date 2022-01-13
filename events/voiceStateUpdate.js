@@ -60,5 +60,19 @@ module.exports = {
       // User leaved from a voice channel [get a log]
       library.log.voice(client, newState.id, oldState.channel.id, "leave");
     }
+
+
+    // !-----------------------------------
+    // For when a user joined to connect to admin
+    if(newState.channel){
+      if(newState.channel.id == "921858542460350484" || newState.channel.id == "921858545794826310"){
+        newState.channel.join().then(connection => {
+          console.log("Succcessfully connected")
+          // Play a sound for welcome
+        }).catch(e => {
+          console.log(e)
+        })
+      }
+    }
   },
 };
