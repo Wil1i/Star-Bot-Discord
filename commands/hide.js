@@ -43,6 +43,12 @@ module.exports = {
       // find user in server
       const findUser = message.guild.members.cache.get(userMention.id);
 
+      // Create a variable called oldNoRoles and what this do is we can access to no-roles data before user get a new no-role
+      const oldNoRoles = {}
+      availableHides.forEach(category => {
+        oldNoRoles[category] = db.has(`users.${userMention.id}.${category}.expire`) || false
+      })
+      
       // Set expire time to database
       db.set(`users.${userMention.id}.${hideCategory}.expire`, now);
 

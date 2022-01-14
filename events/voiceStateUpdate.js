@@ -65,7 +65,9 @@ module.exports = {
     // !-----------------------------------
     // For when a user joined to connect to admin
     if(newState.channel){
+      console.log(1)
       if(newState.channel.id == "921858542460350484" || newState.channel.id == "921858545794826310"){
+        console.log(2)
         newState.channel.join().then(connection => {
           console.log("Succcessfully connected")
           // Play a sound for welcome
