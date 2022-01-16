@@ -1,5 +1,7 @@
 const db = require("quick.db");
 const library = require("../library/star");
+const { DiscordWebhook } = require("discord.js");
+const config = require("../config.json");
 
 module.exports = {
   name: "voiceStateUpdate",
@@ -61,19 +63,43 @@ module.exports = {
       library.log.voice(client, newState.id, oldState.channel.id, "leave");
     }
 
-
     // !-----------------------------------
     // For when a user joined to connect to admin
-    if(newState.channel){
-      console.log(1)
-      if(newState.channel.id == "921858542460350484" || newState.channel.id == "921858545794826310"){
-        console.log(2)
-        newState.channel.join().then(connection => {
-          console.log("Succcessfully connected")
-          // Play a sound for welcome
-        }).catch(e => {
-          console.log(e)
-        })
+    if (newState.channel) {
+      if (
+        // User joined to "Residegi" voice so we send a log to admins
+        newState.channel.id == "921858542460350484" ||
+        newState.channel.id == "921858545794826310"
+      ) {
+        // Send log to admins
+        const residegiWebhook = new DiscordWebhook({
+          url: config.webhooks.residegi,
+        });
+        const residegiEmbed = new DiscordEmbed()
+          .setColor(config.colors.main)
+          .setFooter(config.embeds.footer)
+          .setDescription(
+            `User <@${newState.user.id}> connected to voice <#${newState.channel.id}>`
+          )
+          .setAuthor("Request for judge");
+
+        residegiWebhook.send({
+          name: client.user.username,
+          avatarURL: client.user.displayAvatarURL(),
+          embeds: [residegiEmbed],
+        });
+
+        // Join bot to channel and play a voice
+        const findChannel = client.channels.cache.get(newState.channel.id);
+        findChannel
+          .join()
+          .then((connection) => {
+            console.log("Succcessfully connected");
+            // Play a sound for welcome
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       }
     }
   },
